@@ -1,0 +1,133 @@
+{% extends 'layout.html' %}
+{% block abc %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .form-section {
+            background: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-section label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .form-section input,
+        .form-section select,
+        .form-section textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-section textarea {
+            height: 100px;
+        }
+        
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+      
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="form-section">
+        <form id="sellForm" enctype="multipart/form-data">
+            <label for="title">Title *</label>
+            <input id="title" type="text" name="title" required>
+            
+            <label for="category">Category *</label>
+            <select id="category" name="category" onchange="toggleFields()" required>
+                <option value="">Select category</option>
+                <option value="books">Books</option>
+                <option value="calculators">Calculators</option>
+                <option value="labessentials">Lab Essentials</option>
+            </select>
+            
+            <!-- Author field (hidden by default) -->
+            <div id="author-field" class="hidden">
+                <label for="author">Author *</label>
+                <input id="author" type="text" name="author">
+            </div>
+            
+            <label for="purchased_date">Purchased Year *</label>
+            <input id="purchased_date" type="number" name="purchased_date" required>
+            
+            <label for="price">Price *</label>
+            <input id="price" type="number" name="price" required>
+            
+            <label for="images">Upload Images *</label>
+            <input id="images" type="file" name="images" multiple accept="image/*" required>
+            
+            <label for="ad-description">Ad Description *</label>
+            <textarea id="ad-description" name="ad_description" required></textarea>
+            
+            <label for="name">Your Name *</label>
+            <input id="name" type="text" name="name" required>
+            
+            <label for="mobile">Mobile Number *</label>
+            <input id="mobile" type="text" name="mobile" pattern="\d{10}" title="Enter a 10-digit mobile number" required>
+            
+            <label for="city">City *</label>
+            <input id="city" type="text" name="city" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <script>
+        function toggleFields() {
+            var category = document.getElementById("category").value;
+            var authorField = document.getElementById("author-field");
+            var authorInput = document.getElementById("author");
+
+            if (category === "books") {
+                authorField.classList.remove("hidden");  // Show the author field
+                authorInput.setAttribute("required", "true"); // Make it required
+            } else {
+                authorField.classList.add("hidden");  // Hide the author field
+                authorInput.removeAttribute("required"); // Remove required
+            }
+        }
+
+        document.getElementById("sellForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+        
+            try {
+                const response = await fetch("/submit-form", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (response.ok) {
+                    window.location.href = "/myproducts";  // Redirect immediately after success
+                }
+            } catch (error) {
+                console.error("An error occurred:", error);  // Log error in console (optional)
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+    .checkout-form-container {
+        max-width: 600px;
+        margin: 60px auto;
+        background: #ffffff;
+        padding: 35px 45px;
+        border-radius: 15px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .checkout-form-container h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 28px;
+        font-weight: 600;
+        color: #222;
+    }
+
+    .checkout-form-container form .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .checkout-form-container label {
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 6px;
+    }
+
+    .checkout-form-container input[type="text"],
+    .checkout-form-container input[type="tel"] {
+        padding: 10px 14px;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        transition: border 0.3s;
+    }
+
+    .checkout-form-container input[type="text"]:focus,
+    .checkout-form-container input[type="tel"]:focus {
+        border-color: #6c63ff;
+        outline: none;
+    }
+
+    .checkout-form-container button {
+        margin-top: 10px;
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        background: #6c63ff;
+        border: none;
+        border-radius: 8px;
+        transition: background 0.3s;
+    }
+
+    .checkout-form-container button:hover {
+        background: #5848e4;
+    }
+
+    @media (min-width: 576px) {
+        .checkout-form-container form .form-group {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .checkout-form-container form .form-group label {
+            width: 35%;
+            margin-bottom: 0;
+        }
+
+        .checkout-form-container form .form-group input {
+            width: 65%;
+        }
+    }
+</style>
+
+<div class="checkout-form-container">
+    <h2>Checkout Form</h2>
+
+    <form action="{{ url_for('process_checkout') }}" method="POST">
+        <input type="hidden" name="listing_ids" value="{{ listing_ids }}">
+        <input type="hidden" name="buyer_email" value="{{ user.email }}">
+
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" name="phone" pattern="[0-9]{10}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" name="city" required>
+        </div>
+
+        <button type="submit">Proceed</button>
+    </form>
+</div>
+{% endblock %}

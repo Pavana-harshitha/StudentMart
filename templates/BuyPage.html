@@ -1,0 +1,69 @@
+{%extends "layout.html"%}
+{%block abc%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='BuyPage1.css') }}">
+
+
+{%endblock%}
+{%block content%}
+<main>
+    <div class="container" >
+        <div class="sidebar1">
+            <h3>Filters</h3>
+            <form method="GET" action="{{ url_for('search') }}">
+                <label>Category:</label><br>
+                <input type="checkbox" name="category" value="books" > Books<br>
+                <input type="checkbox" name="category" value="calculators"> Calculators<br>
+                <input type="checkbox" name="category" value="labessentials"> Lab Essentials<br>
+                <br>
+                <label>Price Range:</label><br>
+                Min: <input type="number" name="min_price" value="0" min="0"> <br>
+                Max: <input type="number" name="max_price" value="2000" min="0"> <br>
+                <br>
+                
+                <button type="submit" style="margin-top: 20px;margin-bottom: 20px;"  class="btn btn-secondary">Apply Filters</button>
+                <a href="{{ url_for('search') }}" class="btn btn-secondary">Reset Filters</a>
+            </form>
+            
+        </div>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            
+            {% for i in data %}
+<div class="card">
+    <img src="{{ url_for('static', filename='uploads/' + i.images) }}" class="card-img-top" alt="{{ i.title }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ i.title }}</h5>
+        <p class="card-text">₹{{ i.price }}</p>
+
+        {% if i.is_owner %}
+            <p style="color: green; font-weight: bold;">This is your product</p>
+        {% elif filters_applied or filters_reset %}
+            {% if i.is_owner %}
+                <p style="color: green; font-weight: bold;">This is your product</p>
+            {% else %}
+                <a href="{{ url_for('productdetails', product_id=i.id) }}" class="btn btn-primary">View Product</a>
+            {% endif %}
+        {% else %}
+            <a href="{{ url_for('productdetails', product_id=i.id) }}" class="btn btn-primary">View Product</a>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
+{% if no_results %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+  <div class="text-center p-5 border rounded shadow" style="background-color: #fffbea;">
+    <h2 class="mb-3">😕 No products found</h2>
+    <p class="fs-5">We couldn’t find any results for <span class="text-primary fw-bold">"{{ query }}"</span></p>
+    <p class="text-muted">Try different keywords or remove filters to see more results.</p>
+    <a href="{{ url_for('buypage') }}" class="btn btn-dark mt-3">🔙 Back to Buy Page</a>
+  </div>
+</div>
+{% else %}
+  <!-- your existing product cards loop -->
+{% endif %}
+
+        </div>
+       
+   
+</main>
+{%endblock%}

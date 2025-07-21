@@ -1,0 +1,170 @@
+{% extends 'layout.html' %}
+{% block abc %}
+<style>
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-request-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .product-request-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product-request-form label {
+            display: block;
+            margin: 20px 0 5px;
+        }
+
+        .product-request-form .name-inputs {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .product-request-form input[type="text"],
+        .product-request-form input[type="email"],
+        .product-request-form textarea {
+            width: calc(100% - 20px);
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .product-request-form .product-type {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .product-request-form .product-type input[type="radio"] {
+            margin: 0 5px 0 0;
+        }
+
+        .product-request-form .product-type label {
+            margin: 0;
+        }
+
+        .product-request-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #f90;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .product-request-form button:hover {
+            background-color: #e80;
+        }
+
+        #product-type-style {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 70px;
+        }
+
+        .product-type {
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+        }
+
+        .item {
+            align-self: flex-start;
+        }
+
+        .header {
+            background-color: #fae740;
+            border-radius: 10px 20px;
+            padding: 3px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .searchbar {
+            background-color: transparent;
+            background-color: white;
+        }
+
+        /* Submit button styles */
+        .submit-btn {
+            background: linear-gradient(to right, #e80, #e80);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(94, 80, 249, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(94, 80, 249, 0.3);
+            background: linear-gradient(to right, #5E50F9, #4B49AC);  /* Reverse the gradient or use any color */
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        .submit-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(94, 80, 249, 0.3);
+        }
+    </style>
+    {% endblock %}
+
+    {%block content%}
+            <div class="form-container">
+                <form class="product-request-form" action="/submit_request" method="POST">
+                    <h2>Product Request Form</h2>
+                    <label for="first-name">Your Name</label>
+                    <div class="name-inputs">
+                        <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
+                        <input type="text" id="last-name" name="last-name" placeholder="Last Name" required>
+                    </div>
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="example@example.com" required>
+                    <div id="product-type-style">
+                        <label for="product-type">Product Type</label>
+                        <div class="product-type">
+                            <div class="item">
+                                <input type="radio" id="book" name="product-type" value="book" required>Book
+                            </div>
+                            <div class="item">
+                                <input type="radio" id="calculator" name="product-type" value="calculator">Calculator
+                            </div>
+                            <div class="item">
+                                <input type="radio" id="lab-essentials" name="product-type" value="lab-essentials">Lab Essentials
+                            </div>
+                        </div>
+                    </div>
+                    <label for="product-name">Product Name</label>
+                    <input type="text" id="product-name" name="product-name" placeholder="Enter Product Name" required>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Provide additional details"></textarea>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+        {% endblock %}

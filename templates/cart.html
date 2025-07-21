@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block abc %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Cart.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Shopping Cart</h2>
+    {% if message %}
+<div class="alert alert-{{ message_type }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+  
+    {% if products %}
+    <div class="row">
+        <div class="col-md-8">
+            {% for product in products %}
+            <div class="card mb-3 p-3">
+                <div class="row g-0">
+                    <div class="col-md-3">
+                        <img src="{{ url_for('static', filename='uploads/' + product.images) }}" class="img-fluid rounded" alt="{{ product.title }}">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.title }}</h5>
+                            <p class="text-muted">Seller: {{ product.name }}</p>
+                            <p class="card-text">Price: ₹{{ product.price }}</p>
+                            
+                            <div class="mt-2">
+                                <a href="{{ url_for('remove_from_cart', product_id=product.id) }}" class="text-danger me-3">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h4>Subtotal ({{ products|length }} items): ₹{{ total_price }}</h4>
+                
+                <a href="/checkout" class="btn btn-warning w-100">Proceed to Checkout</a>
+
+            </div>
+        </div>
+    </div>
+    
+    {% else %}
+<div class="text-center mt-5">
+    <h4>Your cart is empty!</h4>
+    <a href="{{ url_for('buypage') }}" class="btn btn-primary mt-3">Browse Products</a>
+</div>
+{% endif %}
+
+</div>
+{% endblock %}

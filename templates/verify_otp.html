@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .wrapper {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        .image-container {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .container {
+            flex: 1;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 20px;
+        }
+        .form-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn:active {
+            background-color: #003f8f;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='signupp1.jpg') }}" alt="Sign Up Illustration">
+        </div>
+        <div class="container">
+            <h1>OTP</h1>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <p>{{ form.otp.label }} {{ form.otp(class="form-input") }}</p>
+               
+                {{ form.submit(class="btn") }}
+            </form>
+
+    
+</body>
+</html>

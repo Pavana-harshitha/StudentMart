@@ -1,0 +1,91 @@
+{%extends "layout.html"%}
+{%block abc%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='HomePage1.css') }}">
+
+{%endblock%}
+{%block content%}
+<div class="image">
+    <h1 id="one">StudentMart</h1>
+    <h2 id="two">A Place to Find and Share Books,Tools</h2>
+</div>
+<div class="WhyUs">
+    <h1 id="three">Why Us</h1>
+    <div class="flex-container">
+        <div class="container">
+            <img src="../static/images/closure.png" id="i1" alt="Best Deals Image">
+            <div class="text-content">
+                <h3>Best Deals</h3>
+                <p>Enjoy the best deals on a variety of subjects, helping you save while accessing high-quality materials.</p>
+            </div>
+        </div>
+        <div class="container">
+            <img src="../static/images/easypaymenticon.jpg" id="i2" alt="Convenience Image">
+            <div class="text-content">
+                <h3>Convenience</h3>
+                <p>Shop anytime, anywhere with a seamless experience, ensuring quick and hassle-free transactions.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Steps">
+    <h1 id="three">How to Sell Used Products in StudentMart</h1>
+    <div class="flex-steps">
+        <div class="step">
+            <img src="../static/images/step1.png"  alt="Step 1 Image">
+            <h3>Simply Register</h3>
+            <p>Create an account in StudentMart</p>
+        </div>
+        <div class="step">
+            <img src="../static/images/step2.png"  alt="Step 2 Image">
+            <h3>Post AD</h3>
+            <p>Fill required details and submit the ad</p>
+        </div>
+    </div>
+</div>
+<!--
+<section class="review-section">
+    <h2>Customer Reviews</h2>
+    <div class="reviews">
+      <div class="review">
+        <div class="review-header">
+          <h3>John Doe</h3>
+          <p class="review-date">December 20, 2024</p>
+        </div>
+        <p class="review-text">This is a great product! Highly recommend it for students looking for reliable study materials.</p>
+      </div>
+
+      <div class="review">
+        <div class="review-header">
+          <h3>Jane Smith</h3>
+          <p class="review-date">December 19, 2024</p>
+        </div>
+        <p class="review-text">Very helpful, exactly what I needed for my exams. Worth every penny!</p>
+      </div>
+    </div>
+     <div class="reviews">
+      <div class="review">
+        <div class="review-header">
+          <h3>John Doe</h3>
+          <p class="review-date">December 20, 2024</p>
+        </div>
+        <p class="review-text">This is a great product! Highly recommend it for students looking for reliable study materials.</p>
+      </div>
+
+      <div class="review">
+        <div class="review-header">
+          <h3>Jane Smith</h3>
+          <p class="review-date">December 19, 2024</p>
+        </div>
+        <p class="review-text">Very helpful, exactly what I needed for my exams. Worth every penny!</p>
+      </div>
+    </div>
+</section>-->
+    <div class="sell-books-section">
+        <div class="sell-books-text">
+            <h2>Where To Sell Used Second Hand Books?</h2>
+            <p>Post an Ad now and one of you will be lucky to have your ad featured. Featured Ad gets more buyer interaction.</p>
+        </div>
+        <button class="post-ad-button">POST FREE AD</button>
+    </div>
+
+{%endblock%}

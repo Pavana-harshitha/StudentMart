@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block abc %}
+    <style>
+      
+        .container {
+            padding: 20px;
+        }
+        .card { 
+            border: 1px solid #ddd; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            border-radius: 5px; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+{%endblock%}
+
+    
+
+    {%block content%}
+    <div class="container">
+        <h1>Donations List</h1>
+        {%if donations %}
+        {% for donation in donations %}
+            <div class="card">
+                <p><strong>Name:</strong> {{ donation.first_name }} {{ donation.last_name }}</p>
+                <p><strong>Email:</strong> {{ donation.email }}</p>
+                <p><strong>Mobile:</strong> {{ donation.mobile }}</p>
+                <p><strong>City:</strong> {{ donation.city }}</p>
+                <p><strong>Approx. Books:</strong> {{ donation.approx_books }}</p>
+            </div>
+        {% endfor %}
+    </div>
+        {%else%}
+        <div class="text-center mt-5">
+    <h4>No Donations Yet!</h4>
+    <p>Want to donate?</p>
+    <a href="{{ url_for('donate') }}" class="btn btn-primary mt-3">Click To Donate</a>
+</div>
+{% endif %}
+{%endblock%}

@@ -1,0 +1,239 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-card">
+        <!-- Avatar Image -->
+        <img src="{{ url_for('static', filename='images/avatar.jpg') }}" alt="Avatar" class="profile-avatar">
+        
+        <!-- Welcome Message -->
+        <h1>Welcome, <span id="welcome-username">{{ username }}</span>!</h1>
+        
+        <!-- Profile Details with Icons -->
+        <div class="profile-details">
+            <p><i class="fas fa-envelope"></i> Email: <span id="email-display">{{ email }}</span></p>
+            <p><i class="fas fa-user"></i> Username: <span id="username-display">{{ username }}</span></p>
+        </div>
+
+        <!-- Edit and Save Buttons -->
+        <div class="profile-actions">
+            <button id="edit-button" class="btn-edit"><i class="fas fa-edit"></i> Edit Profile</button>
+            <button id="save-button" class="btn-save" style="display: none;"><i class="fas fa-save"></i> Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<!-- Add Custom CSS for Styling -->
+<style>
+    /* Center the profile container */
+    .profile-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Full viewport height */
+        background: #f4f4f9; /* Light background color */
+        padding: 40px 20px; /* Increased padding for better spacing */
+    }
+
+    /* Profile card styling */
+    .profile-card {
+        background: white;
+        padding: 40px; /* Increased padding for larger size */
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 500px; /* Slightly increased width */
+        width: 100%;
+    }
+
+    /* Avatar image styling */
+    .profile-avatar {
+        width: 150px; /* Increased avatar size */
+        height: 150px;
+        border-radius: 50%;
+        border: 4px solid #6a11cb; /* Border color */
+        margin-bottom: 20px;
+    }
+
+    /* Welcome message styling */
+    .profile-card h1 {
+        margin: 0 0 20px 0; /* Increased margin */
+        font-size: 28px; /* Larger font size */
+        color: #333;
+    }
+
+    /* Profile details styling */
+    .profile-details {
+        margin-top: 20px; /* Increased margin */
+    }
+
+    .profile-details p {
+        margin: 15px 0; /* Increased margin */
+        font-size: 18px; /* Larger font size */
+        color: #555;
+    }
+
+    .profile-details i {
+        margin-right: 10px;
+        color: #6a11cb; /* Icon color */
+    }
+
+    /* Input fields styling during edit mode */
+    .profile-details input {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 80%;
+        max-width: 300px;
+    }
+
+    /* Profile actions (Edit and Save buttons) */
+    .profile-actions {
+        margin-top: 25px; /* Increased margin */
+    }
+
+    .btn-edit, .btn-save {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .btn-edit {
+        background: #6a11cb; /* Purple color */
+        color: white;
+    }
+
+    .btn-edit:hover {
+        background: #4d0c9a; /* Darker purple on hover */
+    }
+
+    .btn-save {
+        background: #28a745; /* Green color */
+        color: white;
+    }
+
+    .btn-save:hover {
+        background: #218838; /* Darker green on hover */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        .profile-card {
+            padding: 30px; /* Reduced padding for smaller screens */
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+        }
+
+        .profile-card h1 {
+            font-size: 24px;
+        }
+
+        .profile-details p {
+            font-size: 16px;
+        }
+
+        .profile-details input {
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- JavaScript for Edit/Save Functionality -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM fully loaded!"); // Debugging statement
+
+    const editButton = document.getElementById("edit-button");
+    const saveButton = document.getElementById("save-button");
+
+    const emailDisplay = document.getElementById("email-display");
+    const usernameDisplay = document.getElementById("username-display");
+    const welcomeUsername = document.getElementById("welcome-username");
+
+    console.log("Edit Button:", editButton); // Debugging statement
+    console.log("Save Button:", saveButton); // Debugging statement
+    console.log("Email Display:", emailDisplay); // Debugging statement
+    console.log("Username Display:", usernameDisplay); // Debugging statement
+
+    if (editButton && saveButton && emailDisplay && usernameDisplay) {
+        console.log("All elements found!"); // Debugging statement
+
+        // Edit Button Click Event
+        editButton.addEventListener("click", function() {
+            console.log("Edit button clicked!"); // Debugging statement
+
+            // Hide the edit button and show the save button
+            editButton.style.display = "none";
+            saveButton.style.display = "inline-block";
+
+            // Get current values
+            const emailValue = emailDisplay.textContent.trim();
+            const usernameValue = usernameDisplay.textContent.trim();
+
+            // Replace with input fields
+            emailDisplay.innerHTML = `<input type="email" id="email-input" value="${emailValue}" readonly>`;
+            usernameDisplay.innerHTML = `<input type="text" id="username-input" value="${usernameValue}">`;
+        });
+
+        // Save Button Click Event
+        saveButton.addEventListener("click", function() {
+            console.log("Save button clicked!"); // Debugging statement
+
+            // Get input values
+            const emailInput = document.getElementById("email-input").value.trim();
+            const usernameInput = document.getElementById("username-input").value.trim();
+
+            if (!usernameInput) {
+                alert("Please fill in the username field.");
+                return;
+            }
+
+            // Send AJAX request to update profile
+            fetch('/update_profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: usernameInput,
+                    email: emailInput
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Replace inputs with plain text
+                    emailDisplay.textContent = emailInput;
+                    usernameDisplay.textContent = usernameInput;
+                    welcomeUsername.textContent = usernameInput;
+
+                    saveButton.style.display = "none";
+                    editButton.style.display = "inline-block";
+
+                    alert("Changes saved!");
+                } else {
+                    alert(data.message || "Failed to save changes.");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("An error occurred while saving changes.");
+            });
+        });
+    } else {
+        console.error("One or more elements not found!"); // Debugging statement
+    }
+});
+</script>
+{% endblock %}

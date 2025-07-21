@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+    .rejection-container {
+        max-width: 600px;
+        margin: 80px auto;
+        padding: 40px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .rejection-container h2 {
+        color: #e74c3c;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .rejection-container p {
+        font-size: 17px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .rejection-container .listing-name {
+        font-weight: bold;
+        font-size: 20px;
+        color: #222;
+        margin: 15px 0;
+    }
+
+    .rejection-container a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #6c63ff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+    }
+
+    .rejection-container a:hover {
+        background-color: #5848e4;
+    }
+</style>
+
+<div class="rejection-container">
+    <h2>Order Rejected</h2>
+    <p>The order for the following listing has been rejected:</p>
+    <div class="listing-name">{{ listing.title }}</div>
+    <p>If a buyer was assigned, they’ve been notified via email.</p>
+
+    <a href="{{ url_for('seller_orders') }}">Back to Orders</a>
+</div>
+{% endblock %}

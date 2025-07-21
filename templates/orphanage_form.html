@@ -1,0 +1,177 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orphanage Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-group .half-width {
+            width: 48%;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 15px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+        .terms {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .terms input {
+            margin-right: 10px;
+        }
+        
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+    <script>
+        function validateNumberInput(event, maxLength) {
+            const input = event.target;
+            if (input.value.length > maxLength) {
+                input.value = input.value.slice(0, maxLength);
+            }
+        }
+
+        function validateMobile(event, maxLength) {
+            const mobile = document.getElementById("mobile");
+            const mobileError = document.getElementById("mobileError");
+            if (mobile.value.length !== maxLength) {
+                mobileError.textContent = "Mobile number must be exactly 10 digits.";
+            } else {
+                mobileError.textContent = "";
+            }
+        }
+
+        function validatePincode(event, maxLength) {
+            const pincode = document.getElementById("pincode");
+            const pincodeError = document.getElementById("pincodeError");
+            if (pincode.value.length > maxLength) {
+                pincodeError.textContent = "Pincode must be exactly 6 digits.";
+                return false;
+            } else {
+                pincode.value = pincode.value.slice(0, maxLength);
+                pincodeError.textContent = "";
+                return true;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Orphanage Registration</h2>
+        <form action="/add_an_orphanage" method="post">
+            <div class="form-group">
+                
+                    <label for="orphanage_name">Name of the Orphanage</label>
+                    <input type="text" id="orphanage_name" name="orphanage_name" required>
+            </div>    
+                <div class="form-group">
+                    <label for="email">Email ID</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            
+            <div class="form-group">
+                
+                    <label for="mobile">Mobile Number *</label>
+                    <input type="number" id="mobile" name="mobile" maxlength="10" oninput="validateMobile(event, 10)" required>
+                    <span id="mobileError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <div class="half-width">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state" required>
+                </div>
+            
+            
+                
+                <div class="half-width">
+                    <label for="city">City/District/Town *</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="half-width">
+                    <label for="pincode">Pincode *</label>
+                    <input type="number" id="pincode" name="pincode" maxlength="6" oninput="validatePincode(event, 6)" required>
+                    <span id="pincodeError" class="error-message"></span>
+                </div>
+                <div class="half-width">
+                    <label for="address">Door No and Street</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="orphanage_type">Type of Orphanage</label>
+                <select id="orphanage_type" name="orphanage_type" required>
+                    <option value="select">Select</option>
+                    <option value="mixed">Mixed</option>
+                    <option value="government">Government</option>
+                    <option value="private">Private</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

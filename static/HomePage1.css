@@ -1,0 +1,329 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FAE740;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.navbar .logo {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ff6347;
+}
+
+/* Hide the checkbox */
+.menu-toggle {
+  display: none;
+}
+
+/* Hamburger menu styles */
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .menu-icon {
+      display: block;
+  }
+
+  .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      background-color: #333;
+      width: 200px;
+      padding: 10px 0;
+      border-radius: 5px;
+  }
+
+  .menu-toggle:checked + .menu-icon + .nav-links {
+      display: flex;
+  }
+
+  .nav-links li {
+      margin: 10px 0;
+      text-align: center;
+  }
+}
+
+/* Homepage styles */
+.image {
+  background: url(../static/images/background2.jpeg);
+  height: 90vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 85%;
+}
+
+#one {
+  padding-left: 20px;
+  padding-top: 200px;
+  color: white;
+  font-family: 'Irish Grover';
+  font-size: 50px;
+}
+
+#two {
+  color: white;
+  font-family: 'Irish Grover';
+  font-size: 40px;
+  padding-left: 20px;
+}
+
+#three {
+  text-align: center;
+}
+
+.WhyUs {
+  padding-top: 10px;
+}
+
+#i1 {
+  height: 20vh;
+  padding-left: 15vh;
+  padding-top: 10vh;
+}
+
+#i2 {
+  height: 20vh;
+  padding-left: 13vh;
+  padding-top: 8vh;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 45%;
+  flex-wrap: nowrap;
+}
+
+.container img {
+  max-width: 150px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-content h3 {
+  font-size: 24px;
+  margin: 0;
+  color: #333;
+}
+
+.text-content p {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+      width: 100%;
+  }
+
+  .container img {
+      margin-bottom: 15px;
+  }
+
+  .text-content h3,
+  .text-content p {
+      text-align: center;
+  }
+}
+
+.flex-steps {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  padding: 60px;
+}
+
+.step {
+  text-align: center;
+  flex: 1;
+}
+
+.step img {
+  max-width: 150px;
+  height: auto;
+}
+
+.step h3 {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #333;
+}
+
+.step p {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #666;
+}
+
+.review-section {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.review-section h2 {
+  text-align: center;
+  font-size: 2em;
+  color: #050505;
+  margin-bottom: 30px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.reviews {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.review {
+  flex: 1 1 45%;
+  padding: 20px;
+  background-color: #063547;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.review:hover {
+  background-color: #063547;
+  transform: translateY(-5px);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.review-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: white;
+  font-weight: bold;
+}
+
+.review-date {
+  font-size: 0.9em;
+  color: white;
+}
+
+.review-text {
+  font-size: 1em;
+  color: white;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.sell-books-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-image: url(../static/images/postaddbackgroun.jpg);
+  height: 20vh;
+}
+
+.sell-books-text {
+  max-width: 60%;
+  color: white;
+}
+
+.sell-books-text h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.sell-books-text p {
+  font-size: 1.2em;
+  color: white;
+}
+
+.post-ad-button {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  cursor: pointer;
+}
+
+.post-ad-button:hover {
+  background-color: darkred;
+}
+.profile-container {
+  text-align: center;
+  padding: 50px;
+}
+
+.profile-info {
+  margin-top: 20px;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}

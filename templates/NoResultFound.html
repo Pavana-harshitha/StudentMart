@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{%block content%}
+<p style="font-size: 30px;">
+    {% if query %}
+        No products found for "<strong>{{ query }}</strong>"!
+    {% else %}
+        No products found!
+    {% endif %}
+</p>
+{%endblock%}

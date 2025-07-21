@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card text-center p-4 shadow-sm">
+        <img src="../static/images/success.png" alt="Success" style="width: 80px; margin: auto;">
+        <h3 class="mt-3">Order Placed Successfully!</h3>
+        <p>We've sent an email to the seller. They will contact you soon about your order.</p>
+        <a href="{{ url_for('buypage') }}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</div>
+{% endblock %}
