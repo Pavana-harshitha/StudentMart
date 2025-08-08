@@ -1223,15 +1223,16 @@ def submit_request():
             )
             conn.send(message)
 
-    return "Request submitted successfully! Email notifications sent."
+    return render_template("request_submitted.html")
 
-    
+ 
 
 
 #@app.route('/db_create')
 #def db_create():
 #   db.create_all()
  #   return jsonify(msg='Database created')
+ 
 @app.route('/logout')
 def logout():
     session.pop("user_id", None)  
@@ -1248,7 +1249,7 @@ def db_destroy():
 if __name__ == '__main__':
     with app.app_context():  
         db.create_all()
-        create_admin()  # Ensure admin is created on startup
+        create_admin()  
     app.run(debug=True)
 
 
