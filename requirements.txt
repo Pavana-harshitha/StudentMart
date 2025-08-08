@@ -8,3 +8,4 @@ Flask-Mail
 Flask-Migrate
 Flask-Marshmallow
 marshmallow
+marshmallow-sqlalchemy
